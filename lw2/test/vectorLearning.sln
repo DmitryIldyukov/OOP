@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33328.57
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vectorLearning", "vectorLearning\vectorLearning.vcxproj", "{FABF8998-0588-42F8-900E-1648E2EDF476}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FABF8998-0588-42F8-900E-1648E2EDF476}.Debug|x64.ActiveCfg = Debug|x64
+		{FABF8998-0588-42F8-900E-1648E2EDF476}.Debug|x64.Build.0 = Debug|x64
+		{FABF8998-0588-42F8-900E-1648E2EDF476}.Debug|x86.ActiveCfg = Debug|Win32
+		{FABF8998-0588-42F8-900E-1648E2EDF476}.Debug|x86.Build.0 = Debug|Win32
+		{FABF8998-0588-42F8-900E-1648E2EDF476}.Release|x64.ActiveCfg = Release|x64
+		{FABF8998-0588-42F8-900E-1648E2EDF476}.Release|x64.Build.0 = Release|x64
+		{FABF8998-0588-42F8-900E-1648E2EDF476}.Release|x86.ActiveCfg = Release|Win32
+		{FABF8998-0588-42F8-900E-1648E2EDF476}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B12B79C6-D5A8-42B9-B424-2BE64D97B2FF}
+	EndGlobalSection
+EndGlobal

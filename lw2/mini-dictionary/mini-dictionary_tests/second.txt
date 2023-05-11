@@ -1,0 +1,4 @@
+кошка>cat
+мышь>mouse
+ball>м€ч
+м€со>meat

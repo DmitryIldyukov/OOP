@@ -1,0 +1,8 @@
+дерево>tree
+кошка>cat
+мышь>mouse
+мясо>meat
+мяч>ball
+ручка>pen
+собака>dog
+стол>table

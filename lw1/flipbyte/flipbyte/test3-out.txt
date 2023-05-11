@@ -1,0 +1,2 @@
+Incorrect input data
+The entered number is outside the array 0-255

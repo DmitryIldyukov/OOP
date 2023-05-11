@@ -1,0 +1,10 @@
+hello>привет
+дерево>tree
+кот>cat
+кошка>cat
+мышь>mouse
+мясо>meat
+мяч>ball
+ручка>pen
+собака>dog
+стол>table

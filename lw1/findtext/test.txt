@@ -1,0 +1,37 @@
+@echo off
+
+chcp 65001
+
+set PROGRAM="%~1"
+set text=hi
+
+rem Тестируем на регистр букв
+%PROGRAM% test1.txt Hello > %TEMP%\out.txt || goto err
+fc %TEMP%\out.txt test1-out.txt || goto err
+del %TEMP%\out.txt
+echo Test 1 passed!
+
+rem Тестируем пустой текст
+%PROGRAM% test2.txt > %TEMP%\out.txt || goto err
+fc %TEMP%\out.txt test2-out.txt || goto err
+del %TEMP%\out.txt
+echo Test 2 passed!
+
+rem Тестируем на поиск несуществующего текста
+%PROGRAM% test3.txt Anton > %TEMP%\out.txt || goto err
+fc %TEMP%\out.txt test3-out.txt || goto err
+del %TEMP%\out.txt
+echo Test 3 passed!
+
+rem Тестируем из примера
+%PROGRAM% Onegin.txt %text% > %TEMP%\out.txt || goto err
+fc %TEMP%\out.txt Onegin-out.txt || goto err
+del %TEMP%\out.txt
+echo Test 4 passed!
+
+echo All tests passed!
+exit /B 0
+
+:err
+echo Testing failed
+exit /B 1
