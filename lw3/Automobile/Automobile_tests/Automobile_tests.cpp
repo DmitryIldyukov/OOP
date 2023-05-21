@@ -1,10 +1,10 @@
 ﻿#include <iostream>
 #include <Windows.h>
 
+#include "../../../../catch2/catch.hpp"
 #define CATCH_CONFIG_MAIN
-#include "../Automobile/"
+#include "../Automobile/CarController.h"
 #include "../Automobile/Car.h"
-
 
 SCENARIO("Test starting values of car")
 {

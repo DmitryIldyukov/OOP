@@ -10,7 +10,7 @@ int main()
 	setlocale(LC_ALL, "rus");
 
 	Car car;
-	CarController controller(car, std::cin, std::cout);
+	CCarController controller(car, std::cin, std::cout);
 
 	while (!std::cin.eof() && !std::cin.fail())
 	{

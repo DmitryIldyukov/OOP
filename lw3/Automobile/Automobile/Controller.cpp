@@ -22,23 +22,24 @@ std::string const INVALID_ARGUMENT_SPEED = "Скорость должна быть целым числом";
 std::string const ERROR_ARGUMENT_SPEED = "Невозможная скорость на данной передаче";
 std::string const SET_SPEED = "Скорость изменена до ";
 
-CarController::CarController(Car& car, std::istream& input, std::ostream& output)
+CCarController::CCarController(Car& car, std::istream& input, std::ostream& output)
 	: m_car(car)
 	, m_input(input)
 	, m_output(output)
 	, m_actionMap({
-		{ "Help", bind(&CarController::Help, this, std::placeholders::_1) },
-		{ "Info", bind(&CarController::Info, this, std::placeholders::_1) },
-		{ "EngineOn", bind(&CarController::EngineOn, this, std::placeholders::_1) },
-		{ "EngineOff", bind(&CarController::EngineOff, this, std::placeholders::_1) },
-		{ "SetGear", bind(&CarController::SetGear, this, std::placeholders::_1) },
-		{ "SetSpeed", bind(&CarController::SetSpeed, this, std::placeholders::_1) },
-		{ "Quit", bind(&CarController::Quit, this, std::placeholders::_1) },
-		{ "Exit", bind(&CarController::Quit, this, std::placeholders::_1) }
+		{ "Help", bind(&CCarController::Help, this, std::placeholders::_1) },
+		{ "Info", bind(&CCarController::Info, this, std::placeholders::_1) },
+		{ "EngineOn", bind(&CCarController::EngineOn, this, std::placeholders::_1) },
+		{ "EngineOff", bind(&CCarController::EngineOff, this, std::placeholders::_1) },
+		{ "SetGear", bind(&CCarController::SetGear, this, std::placeholders::_1) },
+		{ "SetSpeed", bind(&CCarController::SetSpeed, this, std::placeholders::_1) },
+		{ "Quit", bind(&CCarController::Quit, this, std::placeholders::_1) },
+		{ "Exit", bind(&CCarController::Quit, this, std::placeholders::_1) }
 	})
 {};
 
-bool CarController::HandleCommand()
+
+bool CCarController::HandleCommand()
 {
 	std::string comandLine;
 	std::getline(m_input, comandLine);
@@ -54,13 +55,13 @@ bool CarController::HandleCommand()
 	return false;
 }
 
-bool CarController::Help(std::istream& args)
+bool CCarController::Help(std::istream& args)
 {
 	m_output << INSTRUCTION;
 	return true;
 }
 
-bool CarController::Info(std::istream& args)
+bool CCarController::Info(std::istream& args)
 {
 	if (m_car.IsTurnedOn())
 		m_output << ENGINE_ON << std::endl;
@@ -84,7 +85,7 @@ bool CarController::Info(std::istream& args)
 	return true;
 }
 
-bool CarController::EngineOn(std::istream& args)
+bool CCarController::EngineOn(std::istream& args)
 {
 	if (!m_car.TurnOnEngine()) {
 		m_output << ERROR_ENGINE_ON << std::endl;
@@ -94,7 +95,7 @@ bool CarController::EngineOn(std::istream& args)
 	return true;
 }
 
-bool CarController::EngineOff(std::istream& args)
+bool CCarController::EngineOff(std::istream& args)
 {
 	if (!m_car.TurnOffEngine()) {
 		m_output << ERROR_ENGINE_OFF << std::endl;
@@ -104,7 +105,7 @@ bool CarController::EngineOff(std::istream& args)
 	return true;
 }
 
-bool CarController::SetGear(std::istream& args)
+bool CCarController::SetGear(std::istream& args)
 {
 	if (args.eof())
 	{
@@ -136,7 +137,7 @@ bool CarController::SetGear(std::istream& args)
 	return true;
 }
 
-bool CarController::SetSpeed(std::istream& args)
+bool CCarController::SetSpeed(std::istream& args)
 {
 	if (args.eof())
 	{
@@ -166,7 +167,7 @@ bool CarController::SetSpeed(std::istream& args)
 	return true;
 }
 
-bool CarController::Quit(std::istream& args)
+bool CCarController::Quit(std::istream& args)
 {
 	exit(0);
 	return true;
