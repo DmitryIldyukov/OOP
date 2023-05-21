@@ -18,6 +18,6 @@ int main()
 		if (!controller.HandleCommand())
 			std::cout << UNKNOWN_COMMAND << std::endl;
 	}
-
+	
 	return 0;
 }

@@ -1,8 +1,8 @@
 ﻿#include <iostream>
 #include <Windows.h>
-#include "../../../catch2/catch.hpp"
-#define CATCH_CONFIG_MAIN
 
+#define CATCH_CONFIG_MAIN
+#include "../Automobile/"
 #include "../Automobile/Car.h"
 
 

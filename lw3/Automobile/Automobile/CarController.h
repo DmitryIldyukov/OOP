@@ -7,10 +7,10 @@
 
 class Car;
 
-class CarController
+class CCarController
 {
 public:
-	CarController(Car& car, std::istream& input, std::ostream& output);
+	CCarController(Car& car, std::istream& input, std::ostream& output);
 	bool HandleCommand();
 
 private:

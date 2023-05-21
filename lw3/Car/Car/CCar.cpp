@@ -1,4 +1,4 @@
-#include "Car.h"
+#include "CCar.h"
 
 std::string const ERROR_SET_GEAR_ENGINE_OFF = "Невозможно переключить передачу, т.к. двигатель выключен";
 std::string const ERROR_SET_GEAR_SPEED_LIMIT = "Невозможно переключить передачу, т.к. скорость выходит за пределы!\nДопустимая скорость на ";
@@ -13,27 +13,27 @@ std::map<int, std::pair<int, int>> gearSpeeds = {
 	{ GEAR_5, { GEAR_5_MIN_SPEED, GEAR_5_MAX_SPEED } }
 };
 
-bool Car::IsTurnedOn() const
+bool СCar::IsTurnedOn() const
 {
 	return m_isOn;
 }
 
-Direction Car::GetDirection() const
+Direction СCar::GetDirection() const
 {
 	return m_direction;
 }
 
-int Car::GetSpeed() const
+int СCar::GetSpeed() const
 {
 	return m_speed;
 }
 
-int Car::GetGear() const
+int СCar::GetGear() const
 {
 	return m_gear;
 }
 
-bool Car::TurnOnEngine()
+bool СCar::TurnOnEngine()
 {
 	if (m_speed == GEAR_N_MIN_SPEED && m_gear == GEAR_N_MIN_SPEED)
 	{
@@ -44,7 +44,7 @@ bool Car::TurnOnEngine()
 		return false;
 }
 
-bool Car::TurnOffEngine()
+bool СCar::TurnOffEngine()
 {
 	if (m_speed == GEAR_N_MIN_SPEED && m_gear == GEAR_N_MIN_SPEED)
 	{
@@ -56,7 +56,7 @@ bool Car::TurnOffEngine()
 		return false;
 }
 
-bool Car::SetGear(int gear)
+bool СCar::SetGear(int gear)
 {
 	if (gear == m_gear)
 		return true;
@@ -91,7 +91,7 @@ bool Car::SetGear(int gear)
 	return false;
 }
 
-bool Car::SetSpeed(int speed)
+bool СCar::SetSpeed(int speed)
 {
 	if (speed == m_speed)
 		return true;
