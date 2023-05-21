@@ -77,7 +77,12 @@ bool CCar::SetGear(int gear)
 			return false;
 		}
 		if (m_speed >= gearSpeeds.find(gear)->second.first && m_speed <= gearSpeeds.find(gear)->second.second)
+		{
+			if (m_gear == GEAR_R && gear == GEAR_1 && m_speed != 0)
+				return false;
+
 			m_gear = gear;
+		}
 		else
 		{
 			std::cout << ERROR_SET_GEAR_SPEED_LIMIT << gear << " передаче: "
