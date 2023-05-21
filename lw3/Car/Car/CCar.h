@@ -32,7 +32,7 @@ const int GEAR_5_MIN_SPEED = 50;
 const int GEAR_5_MAX_SPEED = 150;
 const Direction START_DIRECTION = Direction::Stop;
 
-class ÑCar
+class CCar
 {
 public:
 	bool IsTurnedOn() const;

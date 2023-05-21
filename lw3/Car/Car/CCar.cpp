@@ -13,27 +13,27 @@ std::map<int, std::pair<int, int>> gearSpeeds = {
 	{ GEAR_5, { GEAR_5_MIN_SPEED, GEAR_5_MAX_SPEED } }
 };
 
-bool ÑCar::IsTurnedOn() const
+bool CCar::IsTurnedOn() const
 {
 	return m_isOn;
 }
 
-Direction ÑCar::GetDirection() const
+Direction CCar::GetDirection() const
 {
 	return m_direction;
 }
 
-int ÑCar::GetSpeed() const
+int CCar::GetSpeed() const
 {
 	return m_speed;
 }
 
-int ÑCar::GetGear() const
+int CCar::GetGear() const
 {
 	return m_gear;
 }
 
-bool ÑCar::TurnOnEngine()
+bool CCar::TurnOnEngine()
 {
 	if (m_speed == GEAR_N_MIN_SPEED && m_gear == GEAR_N_MIN_SPEED)
 	{
@@ -44,7 +44,7 @@ bool ÑCar::TurnOnEngine()
 		return false;
 }
 
-bool ÑCar::TurnOffEngine()
+bool CCar::TurnOffEngine()
 {
 	if (m_speed == GEAR_N_MIN_SPEED && m_gear == GEAR_N_MIN_SPEED)
 	{
@@ -56,7 +56,7 @@ bool ÑCar::TurnOffEngine()
 		return false;
 }
 
-bool ÑCar::SetGear(int gear)
+bool CCar::SetGear(int gear)
 {
 	if (gear == m_gear)
 		return true;
@@ -91,7 +91,7 @@ bool ÑCar::SetGear(int gear)
 	return false;
 }
 
-bool ÑCar::SetSpeed(int speed)
+bool CCar::SetSpeed(int speed)
 {
 	if (speed == m_speed)
 		return true;
