@@ -43,9 +43,9 @@ void CCarController::StartController()
 {
 	while (!m_input.eof() && !m_output.fail())
 	{
-		std::cout << "> ";
+		m_output << "> ";
 		if (!CCarController::HandleCommand())
-			std::cout << UNKNOWN_COMMAND << std::endl;
+			m_output << UNKNOWN_COMMAND << std::endl;
 	}
 };
 

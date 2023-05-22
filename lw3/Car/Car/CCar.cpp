@@ -86,7 +86,7 @@ bool CCar::SetGear(int gear)
 		}
 		else
 		{
-			std::cout << ERROR_SET_GEAR_SPEED_LIMIT << gear << ERROR_SET_GEAR_SPEED_LIMIT_PART;
+			std::cout << ERROR_SET_GEAR_SPEED_LIMIT << gear << ERROR_SET_GEAR_SPEED_LIMIT_PART
 				<< gearSpeeds.find(gear)->second.first << " - " << gearSpeeds.find(gear)->second.second << std::endl;
 			return false;
 		}
