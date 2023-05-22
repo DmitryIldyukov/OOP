@@ -21,6 +21,7 @@ std::string const INCORRECT_USING_SET_SPEED = "Неправильное использование: SetSp
 std::string const INVALID_ARGUMENT_SPEED = "Скорость должна быть целым числом";
 std::string const ERROR_ARGUMENT_SPEED = "Невозможная скорость на данной передаче";
 std::string const SET_SPEED = "Скорость изменена до ";
+std::string const UNKNOWN_COMMAND = "Неизвестная команда! Попробуйте \"Help\" чтобы получить инструкцию по использованию";
 
 CCarController::CCarController(CCar& car, std::istream& input, std::ostream& output)
 	: m_car(car)
@@ -36,7 +37,17 @@ CCarController::CCarController(CCar& car, std::istream& input, std::ostream& out
 		{ "Quit", bind(&CCarController::Quit, this, std::placeholders::_1) },
 		{ "Exit", bind(&CCarController::Quit, this, std::placeholders::_1) }
 		})
-{};
+{}
+
+void CCarController::StartController()
+{
+	while (!m_input.eof() && !m_output.fail())
+	{
+		std::cout << "> ";
+		if (!CCarController::HandleCommand())
+			std::cout << UNKNOWN_COMMAND << std::endl;
+	}
+};
 
 bool CCarController::HandleCommand()
 {

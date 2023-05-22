@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.33328.57
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodies", "Bodies\Bodies.csproj", "{486EA7ED-B1C2-4ADC-9D12-C93965A3DD3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bodies", "Bodies\Bodies.csproj", "{486EA7ED-B1C2-4ADC-9D12-C93965A3DD3E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B5285A18-A443-40F7-8D8F-A9A8807D264E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BodiesTests", "BodiesTests\BodiesTests.csproj", "{7CBB75B5-44D9-4C20-AE87-C7AF7D4024EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{486EA7ED-B1C2-4ADC-9D12-C93965A3DD3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{486EA7ED-B1C2-4ADC-9D12-C93965A3DD3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{486EA7ED-B1C2-4ADC-9D12-C93965A3DD3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CBB75B5-44D9-4C20-AE87-C7AF7D4024EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CBB75B5-44D9-4C20-AE87-C7AF7D4024EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CBB75B5-44D9-4C20-AE87-C7AF7D4024EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CBB75B5-44D9-4C20-AE87-C7AF7D4024EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7CBB75B5-44D9-4C20-AE87-C7AF7D4024EA} = {B5285A18-A443-40F7-8D8F-A9A8807D264E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E0DF0FEF-893A-42C7-AF42-57CB5269B3BD}

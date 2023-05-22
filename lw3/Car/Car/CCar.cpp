@@ -2,6 +2,7 @@
 
 std::string const ERROR_SET_GEAR_ENGINE_OFF = "Невозможно переключить передачу, т.к. двигатель выключен";
 std::string const ERROR_SET_GEAR_SPEED_LIMIT = "Невозможно переключить передачу, т.к. скорость выходит за пределы!\nДопустимая скорость на ";
+std::string const ERROR_SET_GEAR_SPEED_LIMIT_PART = " передаче: ";
 std::string const ERROR_SET_GEAR_R = "Невозможно переключиться на заднюю передачу, т.к. машина в движении";
 
 std::map<int, std::pair<int, int>> gearSpeeds = {
@@ -85,7 +86,7 @@ bool CCar::SetGear(int gear)
 		}
 		else
 		{
-			std::cout << ERROR_SET_GEAR_SPEED_LIMIT << gear << " передаче: "
+			std::cout << ERROR_SET_GEAR_SPEED_LIMIT << gear << ERROR_SET_GEAR_SPEED_LIMIT_PART;
 				<< gearSpeeds.find(gear)->second.first << " - " << gearSpeeds.find(gear)->second.second << std::endl;
 			return false;
 		}

@@ -17,9 +17,10 @@ public:
 	/// <param name="input"></param>
 	/// <param name="output"></param>
 	CCarController(CCar& car, std::istream& input, std::ostream& output);
-	bool HandleCommand();
+	void StartController();
 
 private:
+	bool HandleCommand();
 	/// <summary>
 	/// Получить интрукцию
 	/// </summary>
