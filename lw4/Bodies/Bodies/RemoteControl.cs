@@ -28,16 +28,17 @@ namespace Bodies
         public void StartProgram()
         {
             const int Exit = 9;
-            const string helpLine = "Выберите:\n1 - создать конус\n2 - создать цилиндр\n3 - создать параллелепипед\n" +
-                "4 - создать сферу\n5 - показать все тела\n6 - показать тело с наибольшей массой\n7 - показать тело, которое будет " +
+            const string helpLine = "Выберите:\n1 - создать тело\n2 - показать все тела\n3 - показать тело с наибольшей массой\n4 - показать тело, которое будет " +
                 "легче всего весить, будучи полностью погруженным в воду\n9 - выход из программы";
             const string Error = "Ошибка, введите число";
 
             int command = 0;
 
-            Output.WriteLine(helpLine);
+            
             while (command != Exit)
             {
+                Output.WriteLine(helpLine);
+
                 Output.Write("> ");
                 if (!int.TryParse(Input.ReadLine(), out command))
                 {
@@ -62,35 +63,20 @@ namespace Bodies
             {
                 case 1:
                     {
-                        CreateCone();
+                        CreateBody(this.BodiesList);
                         break;
                     }
                 case 2:
                     {
-                        CreateCylinder();
+                        ShowAllBodies();
                         break;
                     }
                 case 3:
                     {
-                        CreateParallelepiped();
-                        break;
-                    }
-                case 4:
-                    {
-                        CreateSphere();
-                        break;
-                    }
-                case 5:
-                    {
-                        ShowAllBodies();
-                        break;
-                    }
-                case 6:
-                    {
                         ShowBodyWithLargestMass();
                         break;
                     }
-                case 7:
+                case 4:
                     {
                         ShowBodyWithSmallestMassInWater();
                         break;
@@ -104,10 +90,70 @@ namespace Bodies
         }
 
         /// <summary>
+        /// Создание тела
+        /// </summary>
+        /// <param name="bodiesList"></param>
+        /// <returns></returns>
+        private bool CreateBody(List<CBody> bodiesList)
+        {
+            const string Error = "Такой команды не существует!";
+
+            Output.WriteLine("Выберите, какое тело хотите создать:\n1 - Конус\n2 - Цилиндр\n3 - Параллелепипед\n4 - Сфера\n5 - Составное тело\n9 - отменить создание");
+            if (!int.TryParse(Input.ReadLine(), out int choise))
+            {
+                Output.WriteLine("Такой команды не существует");
+                return false;
+            }
+
+            switch (choise)
+            {
+                case 1:
+                    {
+                        if (!CreateCone(bodiesList))
+                            return false;
+                        return true;
+                    }
+                case 2:
+                    {
+                        if(!CreateCylinder(bodiesList))
+                            return false;
+                        return true;
+                    }
+                case 3:
+                    {
+                        if (!CreateParallelepiped(bodiesList))
+                            return false;
+                        return true;
+                    }
+                case 4:
+                    {
+                        if(!CreateSphere(bodiesList))
+                            return false;
+                        return true;
+                    }
+                case 5:
+                    {
+                        if (!CreateCompoundBody(bodiesList))
+                            return false;
+                        return true;
+                    }
+                case 9:
+                    {
+                        return false;
+                    }
+                default:
+                    {
+                        Output.WriteLine(Error);
+                        return false;
+                    }
+            }
+        }
+
+        /// <summary>
         /// Создание сферы
         /// </summary>
         /// <returns></returns>
-        private bool CreateSphere()
+        private bool CreateSphere(List<CBody> bodiesList)
         {
             double radius, density;
             Output.WriteLine("Введите радиус тела: ");
@@ -127,9 +173,10 @@ namespace Bodies
 
             CSphere sphere = new CSphere(radius, density);
 
-            BodiesList.Add(sphere);
+            bodiesList.Add(sphere);
 
             Output.WriteLine("Фигура создана");
+
             return true;
         }
 
@@ -137,7 +184,7 @@ namespace Bodies
         /// Создание цилиндра
         /// </summary>
         /// <returns></returns>
-        private bool CreateCylinder()
+        private bool CreateCylinder(List<CBody> bodiesList)
         {
             double radius, height, density;
             Output.WriteLine("Введите радиус тела: ");
@@ -165,9 +212,10 @@ namespace Bodies
             }
 
             CCylinder cylinder = new CCylinder(radius, height, density);
-            BodiesList.Add(cylinder);
+            bodiesList.Add(cylinder);
 
             Output.WriteLine("Фигура создана");
+
             return true;
         }
 
@@ -175,7 +223,7 @@ namespace Bodies
         /// Создание Конуса
         /// </summary>
         /// <returns></returns>
-        private bool CreateCone()
+        private bool CreateCone(List<CBody> bodiesList)
         {
             double radius, height, density;
             Output.WriteLine("Введите радиус тела: ");
@@ -204,9 +252,10 @@ namespace Bodies
 
             CCone cone = new CCone(radius, height, density);
 
-            BodiesList.Add(cone);
+            bodiesList.Add(cone);
 
             Output.WriteLine("Фигура создана");
+
             return true;
         }
 
@@ -214,7 +263,7 @@ namespace Bodies
         /// Создание Параллелепипеда
         /// </summary>
         /// <returns></returns>
-        private bool CreateParallelepiped()
+        private bool CreateParallelepiped(List<CBody> bodiesList)
         {
             double width, height, depth, density;
             Output.WriteLine("Введите ширину тела: ");
@@ -248,9 +297,37 @@ namespace Bodies
 
             CParallelepiped parallelepiped = new CParallelepiped(width, height, depth, density);
 
-            BodiesList.Add(parallelepiped);
+            bodiesList.Add(parallelepiped);
 
             Output.WriteLine("Фигура создана");
+
+            return true;
+        }
+
+        /// <summary>
+        /// Создание составного тела
+        /// </summary>
+        /// <param name="bodiesList"></param>
+        /// <returns></returns>
+        private bool CreateCompoundBody(List<CBody> bodiesList)
+        {
+            Output.WriteLine("Введите размер составного тела (количество тел, из которых будет состоять составное тело)");
+            if (!int.TryParse(Input.ReadLine(), out int count))
+            {
+                Output.WriteLine("Ошибка, введите число!");
+                return false;
+            }
+
+            CCompound compound = new CCompound();
+
+            bodiesList.Add(compound);
+
+            for (int i = 0; i < count; i++)
+            {
+                if (!CreateBody(compound.ListBodies))
+                    return false;
+            }
+
             return true;
         }
 
@@ -332,6 +409,8 @@ namespace Bodies
 
             return (body.Density - waterDensity) * g * body.GetVolume();
         }
+
+        //TODO: Действия с составным телом, выбор составного тела
 
         private System.IO.TextReader Input { get; }
         private System.IO.TextWriter Output { get; }

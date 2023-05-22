@@ -16,7 +16,7 @@ namespace Bodies
 
         abstract public double GetVolume();
 
-        public double GetMass()
+        virtual public double GetMass()
         {
             return GetVolume() * this.Density;
         }
