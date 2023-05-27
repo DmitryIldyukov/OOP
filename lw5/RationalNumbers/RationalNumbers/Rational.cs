@@ -19,11 +19,8 @@ namespace RationalNumbers
         /// </param>
         public CRational(int numerator = 0, int denominator = 1)
         {
-            if (denominator == 0)
-                throw new ArgumentNullException();
-
-            if (denominator < 0)
-                throw new ArgumentException();
+            if (denominator <= 0)
+                throw new ArgumentNullException( "Знаменатель должен быть натуральным числом" );
 
             Numerator = numerator;
             Denominator = denominator;
