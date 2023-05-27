@@ -9,6 +9,33 @@ namespace Bodies
 {
     class RemoteControl
     {
+        const string ERROR = "Такой команды не существует!";
+        const string CHOISE_LINE = "Выберите, какое тело хотите создать:\n1 - Конус\n2 - Цилиндр\n3 - Параллелепипед\n4 - Сфера\n5 - Составное тело\n9 - отменить создание";
+        const string HELP_LINE = "Выберите:\n1 - создать тело\n2 - показать все тела\n3 - показать тело с наибольшей массой\n4 - показать тело, которое будет легче всего весить, будучи полностью погруженным в воду\n9 - выход из программы";
+        const string ERROR_NUMBER = "Ошибка, введите число";
+        const string ENTER_RADIUS_LINE = "Введите радиус тела: ";
+        const string ENTER_HEIGHT_LINE = "Введите высоту тела: ";
+        const string ENTER_DENSITY_LINE = "Введите плотность тела: ";
+        const string ENTER_WIDTH_LINE = "Введите ширину тела: ";
+        const string ENTER_DEPTH_LINE = "Введите глубину тела: ";
+        const string BODY_WITH_SMALLEST_MASS_IN_WATER_MESSAGE = "Тело с наименьшей массой в воде: ";
+        const string SHOW_BODY_WITH_LARGEST_MASS_MESSAGE = "Тело с наибольшей массой: ";
+        const string NOBODY_MESSAGE = "Вы не создали ни одного тела";
+        const string ERROR_ENTERED = "Ошибка, неверный ввод!";
+        const string FIGURE_CREATED_MESSAGE = "Фигура создана";
+        const string ENTER_LINE = "> ";
+
+        const int EXIT = 9;
+        const int CREATE_BODY_CHOISE = 1;
+        const int SHOW_ALL_BODIES_CHOISE = 2;
+        const int SHOW_BODY_WITH_LARGEST_MASS_CHOISE = 3;
+        const int SHOW_BODY_WITH_SMALLEST_MASS_IN_WATER_CHOISE = 4;
+        const int CREATE_CONE_CHOISE = 1;
+        const int CREATE_CYLINDER_CHOISE = 2;
+        const int CREATE_PARALLELEPIPED_CHOISE = 3;
+        const int CREATE_SPHERE_CHOISE = 4;
+        const int CREATE_COMPOUND_CHOISE = 5;
+
         /// <summary>
         /// Создание контроллера
         /// </summary>
@@ -27,22 +54,16 @@ namespace Bodies
         /// </summary>
         public void StartProgram()
         {
-            const int Exit = 9;
-            const string helpLine = "Выберите:\n1 - создать тело\n2 - показать все тела\n3 - показать тело с наибольшей массой\n4 - показать тело, которое будет " +
-                "легче всего весить, будучи полностью погруженным в воду\n9 - выход из программы";
-            const string Error = "Ошибка, введите число";
-
             int command = 0;
-
             
-            while (command != Exit)
+            while (command != EXIT)
             {
-                Output.WriteLine(helpLine);
+                Output.WriteLine(HELP_LINE);
 
-                Output.Write("> ");
+                Output.Write(ENTER_LINE);
                 if (!int.TryParse(Input.ReadLine(), out command))
                 {
-                    Output.WriteLine(Error);
+                    Output.WriteLine(ERROR_NUMBER);
                 }
                 else
                 {
@@ -57,33 +78,31 @@ namespace Bodies
         /// <param name="command"></param>
         private void Controll(int command)
         {
-            const string Error = "Такой команды не существует!";
-
             switch (command)
             {
-                case 1:
+                case CREATE_BODY_CHOISE:
                     {
                         CreateBody(this.BodiesList);
                         break;
                     }
-                case 2:
+                case SHOW_ALL_BODIES_CHOISE:
                     {
                         ShowAllBodies();
                         break;
                     }
-                case 3:
+                case SHOW_BODY_WITH_LARGEST_MASS_CHOISE:
                     {
                         ShowBodyWithLargestMass();
                         break;
                     }
-                case 4:
+                case SHOW_BODY_WITH_SMALLEST_MASS_IN_WATER_CHOISE:
                     {
                         ShowBodyWithSmallestMassInWater();
                         break;
                     }
                 default:
                     {
-                        Output.WriteLine(Error);
+                        Output.WriteLine(ERROR);
                         break;
                     }
             }
@@ -96,54 +115,52 @@ namespace Bodies
         /// <returns></returns>
         private bool CreateBody(List<CBody> bodiesList)
         {
-            const string Error = "Такой команды не существует!";
-
-            Output.WriteLine("Выберите, какое тело хотите создать:\n1 - Конус\n2 - Цилиндр\n3 - Параллелепипед\n4 - Сфера\n5 - Составное тело\n9 - отменить создание");
+            Output.WriteLine(CHOISE_LINE);
             if (!int.TryParse(Input.ReadLine(), out int choise))
             {
-                Output.WriteLine("Такой команды не существует");
+                Output.WriteLine(ERROR);
                 return false;
             }
 
             switch (choise)
             {
-                case 1:
+                case CREATE_CONE_CHOISE:
                     {
                         if (!CreateCone(bodiesList))
                             return false;
                         return true;
                     }
-                case 2:
+                case CREATE_CYLINDER_CHOISE:
                     {
                         if(!CreateCylinder(bodiesList))
                             return false;
                         return true;
                     }
-                case 3:
+                case CREATE_PARALLELEPIPED_CHOISE:
                     {
                         if (!CreateParallelepiped(bodiesList))
                             return false;
                         return true;
                     }
-                case 4:
+                case CREATE_SPHERE_CHOISE:
                     {
                         if(!CreateSphere(bodiesList))
                             return false;
                         return true;
                     }
-                case 5:
+                case CREATE_COMPOUND_CHOISE:
                     {
                         if (!CreateCompoundBody(bodiesList))
                             return false;
                         return true;
                     }
-                case 9:
+                case EXIT:
                     {
                         return false;
                     }
                 default:
                     {
-                        Output.WriteLine(Error);
+                        Output.WriteLine(ERROR);
                         return false;
                     }
             }
@@ -156,18 +173,18 @@ namespace Bodies
         private bool CreateSphere(List<CBody> bodiesList)
         {
             double radius, density;
-            Output.WriteLine("Введите радиус тела: ");
-            Output.Write("> ");
+            Output.WriteLine(ENTER_RADIUS_LINE);
+            Output.Write(ENTER_LINE);
             if (!double.TryParse(Input.ReadLine(), out radius))
             {
-                Output.WriteLine("Ошибка, неверный ввод радиуса!");
+                Output.WriteLine(ERROR_ENTERED);
                 return false;
             }
-            Output.WriteLine("Введите плотность тела: ");
-            Output.Write("> ");
+            Output.WriteLine(ENTER_DENSITY_LINE);
+            Output.Write(ENTER_LINE);
             if (!double.TryParse(Input.ReadLine(), out density))
             {
-                Output.WriteLine("Ошибка, неверный ввод плотности!");
+                Output.WriteLine(ENTER_DENSITY_LINE);
                 return false;
             }
 
@@ -175,7 +192,7 @@ namespace Bodies
 
             bodiesList.Add(sphere);
 
-            Output.WriteLine("Фигура создана");
+            Output.WriteLine(FIGURE_CREATED_MESSAGE);
 
             return true;
         }
@@ -187,34 +204,34 @@ namespace Bodies
         private bool CreateCylinder(List<CBody> bodiesList)
         {
             double radius, height, density;
-            Output.WriteLine("Введите радиус тела: ");
-            Output.Write("> ");
+            Output.WriteLine(ENTER_RADIUS_LINE);
+            Output.Write(ENTER_LINE);
             if (!double.TryParse(Input.ReadLine(), out radius))
             {
-                Output.WriteLine("Ошибка, неверный ввод!");
+                Output.WriteLine(ERROR_ENTERED);
                 return false;
             }
 
-            Output.WriteLine("Введите высоту тела: ");
-            Output.Write("> ");
+            Output.WriteLine(ENTER_HEIGHT_LINE);
+            Output.Write(ENTER_LINE);
             if (!double.TryParse(Input.ReadLine(), out height))
             {
-                Output.WriteLine("Ошибка, неверный ввод!");
+                Output.WriteLine(ERROR_ENTERED);
                 return false;
             }
 
-            Output.WriteLine("Введите плотность тела: ");
-            Output.Write("> ");
+            Output.WriteLine(ENTER_DENSITY_LINE);
+            Output.Write(ENTER_LINE);
             if (!double.TryParse(Input.ReadLine(), out density))
             {
-                Output.WriteLine("Ошибка, неверный ввод!");
+                Output.WriteLine(ERROR_ENTERED);
                 return false;
             }
 
             CCylinder cylinder = new CCylinder(radius, height, density);
             bodiesList.Add(cylinder);
 
-            Output.WriteLine("Фигура создана");
+            Output.WriteLine(FIGURE_CREATED_MESSAGE);
 
             return true;
         }
@@ -226,27 +243,27 @@ namespace Bodies
         private bool CreateCone(List<CBody> bodiesList)
         {
             double radius, height, density;
-            Output.WriteLine("Введите радиус тела: ");
-            Output.Write("> ");
+            Output.WriteLine(ENTER_RADIUS_LINE);
+            Output.Write(ENTER_LINE);
             if (!double.TryParse(Input.ReadLine(), out radius))
             {
-                Output.WriteLine("Ошибка, неверный ввод!");
+                Output.WriteLine(ERROR_ENTERED);
                 return false;
             }
 
-            Output.WriteLine("Введите высоту тела: ");
-            Output.Write("> ");
+            Output.WriteLine(ENTER_HEIGHT_LINE);
+            Output.Write(ENTER_LINE);
             if (!double.TryParse(Input.ReadLine(), out height))
             {
-                Output.WriteLine("Ошибка, неверный ввод!");
+                Output.WriteLine(ERROR_ENTERED);
                 return false;
             }
 
-            Output.WriteLine("Введите плотность тела: ");
-            Output.Write("> ");
+            Output.WriteLine(ENTER_DENSITY_LINE);
+            Output.Write(ENTER_LINE);
             if (!double.TryParse(Input.ReadLine(), out density))
             {
-                Output.WriteLine("Ошибка, неверный ввод!");
+                Output.WriteLine(ERROR_ENTERED);
                 return false;
             }
 
@@ -254,7 +271,7 @@ namespace Bodies
 
             bodiesList.Add(cone);
 
-            Output.WriteLine("Фигура создана");
+            Output.WriteLine(FIGURE_CREATED_MESSAGE);
 
             return true;
         }
@@ -266,32 +283,32 @@ namespace Bodies
         private bool CreateParallelepiped(List<CBody> bodiesList)
         {
             double width, height, depth, density;
-            Output.WriteLine("Введите ширину тела: ");
-            Output.Write("> ");
+            Output.WriteLine(ENTER_WIDTH_LINE);
+            Output.Write(ENTER_LINE);
             if (!double.TryParse(Input.ReadLine(), out width))
             {
-                Output.WriteLine("Ошибка, неверный ввод!");
+                Output.WriteLine(ERROR_ENTERED);
                 return false;
             }
-            Output.WriteLine("Введите высоту тела: ");
-            Output.Write("> ");
+            Output.WriteLine(ENTER_HEIGHT_LINE);
+            Output.Write(ENTER_LINE);
             if (!double.TryParse(Input.ReadLine(), out height))
             {
-                Output.WriteLine("Ошибка, неверный ввод!");
+                Output.WriteLine(ERROR_ENTERED);
                 return false;
             }
-            Output.WriteLine("Введите глубину тела: ");
-            Output.Write("> ");
+            Output.WriteLine(ENTER_DEPTH_LINE);
+            Output.Write(ENTER_LINE);
             if (!double.TryParse(Input.ReadLine(), out depth))
             {
-                Output.WriteLine("Ошибка, неверный ввод!");
+                Output.WriteLine(ERROR_ENTERED);
                 return false;
             }
-            Output.WriteLine("Введите плотность тела: ");
-            Output.Write("> ");
+            Output.WriteLine(ENTER_DENSITY_LINE);
+            Output.Write(ENTER_LINE);
             if (!double.TryParse(Input.ReadLine(), out density))
             {
-                Output.WriteLine("Ошибка, неверный ввод!");
+                Output.WriteLine(ERROR_ENTERED);
                 return false;
             }
 
@@ -299,7 +316,7 @@ namespace Bodies
 
             bodiesList.Add(parallelepiped);
 
-            Output.WriteLine("Фигура создана");
+            Output.WriteLine(FIGURE_CREATED_MESSAGE);
 
             return true;
         }
@@ -324,7 +341,7 @@ namespace Bodies
 
             for (int i = 0; i < count; i++)
             {
-                if (!CreateBody(compound.ListBodies))
+                if (!CreateBody(compound.CompoundBodies))
                     return false;
             }
 
@@ -338,7 +355,7 @@ namespace Bodies
         {
             if (BodiesList.Count == 0)
             {
-                Output.WriteLine("Вы не создали ни одного тела");
+                Output.WriteLine(NOBODY_MESSAGE);
                 return;
             }
             foreach (var body in BodiesList)
@@ -354,7 +371,7 @@ namespace Bodies
         {
             if (BodiesList.Count == 0)
             {
-                Output.WriteLine("Вы не создали ни одного тела");
+                Output.WriteLine(NOBODY_MESSAGE);
                 return;
             }
 
@@ -368,7 +385,7 @@ namespace Bodies
                 }
             }
 
-            Output.WriteLine("Тело с наибольшей массой: ");
+            Output.WriteLine(SHOW_BODY_WITH_LARGEST_MASS_MESSAGE);
             Output.WriteLine(largestMassBody.ToString());
         }
 
@@ -379,7 +396,7 @@ namespace Bodies
         {
             if (BodiesList.Count == 0)
             {
-                Output.WriteLine("Вы не создали ни одного тела");
+                Output.WriteLine(NOBODY_MESSAGE);
                 return;
             }
 
@@ -393,7 +410,7 @@ namespace Bodies
                 }
             }
 
-            Output.WriteLine("Тело с наименьшей массой в воде: ");
+            Output.WriteLine(BODY_WITH_SMALLEST_MASS_IN_WATER_MESSAGE);
             Output.WriteLine(smallestMassInWaterBody.ToString());
         }
 

@@ -11,22 +11,22 @@ namespace Bodies.Body
         public CCompound()
             : base ("Compound body", 0)
         {
-            ListBodies = new List<CBody>();
+            CompoundBodies = new List<CBody>();
             this.Density = this.GetCompoundDensity();
         }
         private void AddBody(CBody body)
         {
-            ListBodies.Add(body);
+            CompoundBodies.Add(body);
             this.Density = this.GetCompoundDensity();
         }
         private bool DeleteBody(int index)
         {
-            if (index < 1 || index > ListBodies.Count)
+            if (index < 1 || index > CompoundBodies.Count)
             {
                 return false;
             }
 
-            ListBodies.RemoveAt(index--);
+            CompoundBodies.RemoveAt(index--);
             this.Density = this.GetCompoundDensity();
 
             return true;
@@ -35,17 +35,17 @@ namespace Bodies.Body
         {
             double density = 0;
 
-            foreach (CBody body in ListBodies)
+            foreach (CBody body in CompoundBodies)
             {
                 density += body.Density;
             }
 
-            return density / ListBodies.Count;
+            return density / CompoundBodies.Count;
         }
         public override double GetVolume()
         {
             double volume = 0;
-            foreach (CBody body in ListBodies)
+            foreach (CBody body in CompoundBodies)
             {
                 volume += body.GetVolume();
             }
@@ -64,7 +64,7 @@ namespace Bodies.Body
         {
             string info = "";
 
-            foreach (CBody body in ListBodies)
+            foreach (CBody body in CompoundBodies)
             {
                 info += body.ToString() + "\n\n---------------\n\n";
             }
@@ -72,6 +72,6 @@ namespace Bodies.Body
             return info;
         }
         
-        public List<CBody> ListBodies { get; set; }
+        public List<CBody> CompoundBodies { get; set; }
     }
 }
