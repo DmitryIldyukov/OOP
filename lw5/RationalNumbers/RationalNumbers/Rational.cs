@@ -132,9 +132,7 @@ namespace RationalNumbers
         /// <returns></returns>
         public static bool operator !=(CRational rational1, CRational rational2)
         {
-            if (rational1.ToDouble() == rational2.ToDouble())
-                return true;
-            return false;
+            return rational1.ToDouble() != rational2.ToDouble();
         }
 
         /// <summary>
@@ -145,9 +143,7 @@ namespace RationalNumbers
         /// <returns></returns>
         public static bool operator ==(CRational rational1, CRational rational2)
         {
-            if (rational1.ToDouble() != rational2.ToDouble())
-                return true;
-            return false;
+            return rational1.ToDouble() == rational2.ToDouble();
         }
 
         /// <summary>
@@ -158,9 +154,7 @@ namespace RationalNumbers
         /// <returns></returns>
         public static bool operator >(CRational rational1, CRational rational2)
         {
-            if (rational1.ToDouble() > rational2.ToDouble())
-                return true;
-            return false;
+            return rational1.ToDouble() > rational2.ToDouble();
         }
 
         /// <summary>
@@ -171,9 +165,7 @@ namespace RationalNumbers
         /// <returns></returns>
         public static bool operator <(CRational rational1, CRational rational2)
         {
-            if (rational1.ToDouble() < rational2.ToDouble())
-                return true;
-            return false;
+            return rational1.ToDouble() < rational2.ToDouble();
         }
 
         /// <summary>
@@ -184,9 +176,7 @@ namespace RationalNumbers
         /// <returns></returns>
         public static bool operator >=(CRational rational1, CRational rational2)
         {
-            if (rational1.ToDouble() >= rational2.ToDouble())
-                return true;
-            return false;
+            return rational1.ToDouble() >= rational2.ToDouble();
         }
 
         /// <summary>
@@ -197,9 +187,7 @@ namespace RationalNumbers
         /// <returns></returns>
         public static bool operator <=(CRational rational1, CRational rational2)
         {
-            if (rational1.ToDouble() <= rational2.ToDouble())
-                return true;
-            return false;
+            return rational1.ToDouble() <= rational2.ToDouble(); 
         }
 
         /// <summary>
