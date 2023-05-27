@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RationalNumbers
 {
-    public class CRational
+    public class CRational : IComparable<CRational>
     {
         /// <summary>
         /// Создание рационального числа
@@ -33,7 +33,7 @@ namespace RationalNumbers
         /// <summary>
         /// Унарный минус
         /// </summary>
-        /// <param name="rationalNumber"></param>
+        /// <param name="rationalNumber">Рациональное число</param>
         /// <returns></returns>
         public static CRational operator -(CRational rationalNumber)
         {
@@ -43,11 +43,11 @@ namespace RationalNumbers
         /// <summary>
         /// Унарный плюс
         /// </summary>
-        /// <param name="rationalNumber"></param>
+        /// <param name="rationalNumber">Рациональное число</param>
         /// <returns></returns>
         public static CRational operator +(CRational rationalNumber)
         {
-            return new CRational { Numerator = rationalNumber.Numerator, Denominator = rationalNumber.Denominator };
+            return rationalNumber;
         }
 
         /// <summary>
@@ -79,29 +79,133 @@ namespace RationalNumbers
         /// <summary>
         /// Префиксный оператор увеличения
         /// </summary>
-        /// <param name="rational"></param>
+        /// <param name="rational">Рациональное число</param>
         /// <returns></returns>
         public static CRational operator ++(CRational rational)
         {
-            int newNumerator = rational.Numerator + rational.Numerator * rational.Denominator;
+            int newNumerator = rational.Numerator + rational.Denominator;
             return new CRational(newNumerator, rational.Denominator);
         }
 
         /// <summary>
         /// Префиксный оператор уменьшения
         /// </summary>
-        /// <param name="rational"></param>
+        /// <param name="rational">Рациональное число</param>
         /// <returns></returns>
         public static CRational operator --(CRational rational)
         {
-            int newNumerator = rational.Numerator - rational.Numerator * rational.Denominator;
+            int newNumerator = rational.Numerator - rational.Denominator;
             return new CRational(newNumerator, rational.Denominator);
+        }
+
+        /// <summary>
+        /// Умножение
+        /// </summary>
+        /// <param name="rational1"></param>
+        /// <param name="rational2"></param>
+        /// <returns></returns>
+        public static CRational operator *(CRational rational1, CRational rational2)
+        {
+            int newNumerator = rational1.Numerator * rational2.Numerator;
+            int commonDenuminator = rational1.Denominator * rational2.Denominator;
+            return new CRational(newNumerator, commonDenuminator);
+        }
+
+        /// <summary>
+        /// Деление
+        /// </summary>
+        /// <param name="rational1"></param>
+        /// <param name="rational2"></param>
+        /// <returns></returns>
+        public static CRational operator /(CRational rational1, CRational rational2)
+        {
+            int newNumerator = rational1.Numerator * rational2.Denominator;
+            int commonDenuminator = rational1.Denominator * rational2.Numerator;
+            return new CRational(newNumerator, commonDenuminator);
+        }
+
+        /// <summary>
+        /// Проверка на неравенство
+        /// </summary>
+        /// <param name="rational1"></param>
+        /// <param name="rational2"></param>
+        /// <returns></returns>
+        public static bool operator !=(CRational rational1, CRational rational2)
+        {
+            if (rational1.ToDouble() == rational2.ToDouble())
+                return true;
+            return false;
+        }
+
+        /// <summary>
+        /// Проверка на равенство
+        /// </summary>
+        /// <param name="rational1"></param>
+        /// <param name="rational2"></param>
+        /// <returns></returns>
+        public static bool operator ==(CRational rational1, CRational rational2)
+        {
+            if (rational1.ToDouble() != rational2.ToDouble())
+                return true;
+            return false;
+        }
+
+        /// <summary>
+        /// Оператор сравнения (больше)
+        /// </summary>
+        /// <param name="rational1"></param>
+        /// <param name="rational2"></param>
+        /// <returns></returns>
+        public static bool operator >(CRational rational1, CRational rational2)
+        {
+            if (rational1.ToDouble() > rational2.ToDouble())
+                return true;
+            return false;
+        }
+
+        /// <summary>
+        /// Оператор сравнения (меньше)
+        /// </summary>
+        /// <param name="rational1"></param>
+        /// <param name="rational2"></param>
+        /// <returns></returns>
+        public static bool operator <(CRational rational1, CRational rational2)
+        {
+            if (rational1.ToDouble() < rational2.ToDouble())
+                return true;
+            return false;
+        }
+
+        /// <summary>
+        /// Оператор сравнения (больше или равно)
+        /// </summary>
+        /// <param name="rational1"></param>
+        /// <param name="rational2"></param>
+        /// <returns></returns>
+        public static bool operator >=(CRational rational1, CRational rational2)
+        {
+            if (rational1.ToDouble() >= rational2.ToDouble())
+                return true;
+            return false;
+        }
+
+        /// <summary>
+        /// Оператор сравнения (меньше или равно)
+        /// </summary>
+        /// <param name="rational1"></param>
+        /// <param name="rational2"></param>
+        /// <returns></returns>
+        public static bool operator <=(CRational rational1, CRational rational2)
+        {
+            if (rational1.ToDouble() <= rational2.ToDouble())
+                return true;
+            return false;
         }
 
         /// <summary>
         /// Неявное прeобразование типа int в CRational
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="value">Челое число</param>
         public static implicit operator CRational(int value)
         {
             return new CRational(value);
@@ -119,8 +223,8 @@ namespace RationalNumbers
         /// <summary>
         /// Приведение рационального числа к правильному виду
         /// </summary>
-        /// <param name="numerator"></param>
-        /// <param name="denominator"></param>
+        /// <param name="numerator">Числитель</param>
+        /// <param name="denominator">Знаменатель</param>
         private void ToRational()
         {
             int numerator = Numerator;
@@ -163,7 +267,7 @@ namespace RationalNumbers
         }
 
         /// <summary>
-        /// Получить значения рационального числа
+        /// Получить значение рационального числа
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -187,6 +291,13 @@ namespace RationalNumbers
         public int GetDenominator()
         {
             return Denominator;
+        }
+
+        public int CompareTo(CRational other)
+        {
+            if (this.ToDouble() > other.ToDouble()) return 1;
+            else if (this.ToDouble() < other.ToDouble()) return -1;
+            else return 0;
         }
 
         private int Numerator { get; set; }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace RationalNumbers
 {
@@ -8,8 +9,10 @@ namespace RationalNumbers
         {
             try
             {
-                CRational number = new CRational(23);
-                number++;
+                CRational rational1 = new CRational(2, 3);
+                CRational rational2 = new CRational(3, 2);
+                bool f = rational1 != rational2;
+                Console.WriteLine(f);
             }
             catch (Exception e)
             {

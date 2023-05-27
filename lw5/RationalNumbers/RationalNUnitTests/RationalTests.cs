@@ -218,16 +218,203 @@ namespace RationalNUnitTests
         public void Prefix_Plus()
         {
             CRational rational = new CRational(2, 3);
-            CRational result = rational++;
+            rational++;
             CRational expectedResult = new CRational(5, 3);
+            Assert.AreEqual(expectedResult.GetNumerator(), rational.GetNumerator());
+            Assert.AreEqual(expectedResult.GetDenominator(), rational.GetDenominator());
         }
 
         [Test]
         public void Prefix_Minus()
         {
             CRational rational = new CRational(2, 3);
-            CRational result = rational--;
+            rational--;
             CRational expectedResult = new CRational(-1, 3);
+            Assert.AreEqual(expectedResult.GetNumerator(), rational.GetNumerator());
+            Assert.AreEqual(expectedResult.GetDenominator(), rational.GetDenominator());
+        }
+
+        [Test]
+        public void Assignment_Operator_Plus()
+        {
+            CRational rational = new CRational(2, 3);
+            rational += 5;
+            CRational expectedResult = new CRational(17, 3);
+            Assert.AreEqual(expectedResult.GetNumerator(), rational.GetNumerator());
+            Assert.AreEqual(expectedResult.GetDenominator(), rational.GetDenominator());
+        }
+
+        [Test]
+        public void Assignment_Operator_Minus()
+        {
+            CRational rational = new CRational(2, 3);
+            rational -= 5;
+            CRational expectedResult = new CRational(-13, 3);
+            Assert.AreEqual(expectedResult.GetNumerator(), rational.GetNumerator());
+            Assert.AreEqual(expectedResult.GetDenominator(), rational.GetDenominator());
+        }
+    }
+
+    public class RationalMultiplicationAndDivisionOperatorsTests
+    { 
+        [Test]
+        public void Multiplication_With_Integer()
+        {
+            CRational rational = new CRational(2, 3);
+            CRational result = rational * 5;
+            CRational expectedResult = new CRational(10, 3);
+            Assert.AreEqual(expectedResult.GetNumerator(), result.GetNumerator());
+            Assert.AreEqual(expectedResult.GetDenominator(), result.GetDenominator());
+        }
+
+        [Test]
+        public void Multiplication_With_Rational_Number()
+        {
+            CRational rational1 = new CRational(2, 3);
+            CRational rational2 = new CRational(3, 2);
+            CRational result = rational1 * rational2;
+            CRational expectedResult = new CRational(1);
+            Assert.AreEqual(expectedResult.GetNumerator(), result.GetNumerator());
+            Assert.AreEqual(expectedResult.GetDenominator(), result.GetDenominator());
+        }
+
+        [Test]
+        public void Integer_Multiplication_With_Assignment()
+        {
+            CRational rational = new CRational(2, 3);
+            rational *= 5;
+            CRational expectedResult = new CRational(10, 3);
+            Assert.AreEqual(expectedResult.GetNumerator(), rational.GetNumerator());
+            Assert.AreEqual(expectedResult.GetDenominator(), rational.GetDenominator());
+        }
+
+        [Test]
+        public void Rational_Multiplication_With_Assignment()
+        {
+            CRational rational1 = new CRational(2, 3);
+            CRational rational2 = new CRational(3, 2);
+            rational1 *= rational2;
+            CRational expectedResult = new CRational(1);
+            Assert.AreEqual(expectedResult.GetNumerator(), rational1.GetNumerator());
+            Assert.AreEqual(expectedResult.GetDenominator(), rational1.GetDenominator());
+        }
+
+        [Test]
+        public void Division_With_Integer()
+        {
+            CRational rational = new CRational(2, 3);
+            CRational result = rational / 5;
+            CRational expectedResult = new CRational(2, 15);
+            Assert.AreEqual(expectedResult.GetNumerator(), result.GetNumerator());
+            Assert.AreEqual(expectedResult.GetDenominator(), result.GetDenominator());
+        }
+
+        [Test]
+        public void Division_With_Rational_Number()
+        {
+            CRational rational1 = new CRational(2, 3);
+            CRational rational2 = new CRational(3, 2);
+            CRational result = rational1 / rational2;
+            CRational expectedResult = new CRational(4, 9);
+            Assert.AreEqual(expectedResult.GetNumerator(), result.GetNumerator());
+            Assert.AreEqual(expectedResult.GetDenominator(), result.GetDenominator());
+        }
+
+        [Test]
+        public void Integer_Division_With_Assignment()
+        {
+            CRational rational = new CRational(2, 3);
+            rational /= 5;
+            CRational expectedResult = new CRational(2, 15);
+            Assert.AreEqual(expectedResult.GetNumerator(), rational.GetNumerator());
+            Assert.AreEqual(expectedResult.GetDenominator(), rational.GetDenominator());
+        }
+
+        [Test]
+        public void Rational_Division_With_Assignment()
+        {
+            CRational rational1 = new CRational(2, 3);
+            CRational rational2 = new CRational(3, 2);
+            rational1 /= rational2;
+            CRational expectedResult = new CRational(4, 9);
+            Assert.AreEqual(expectedResult.GetNumerator(), rational1.GetNumerator());
+            Assert.AreEqual(expectedResult.GetDenominator(), rational1.GetDenominator());
+        }
+    }
+
+    public class RationalEqualityTests
+    {
+        [Test]
+        public void Equality_Of_Rational_And_Integer()
+        {
+            CRational rational1 = new CRational(2, 2);
+            CRational rational2 = new CRational(2, 3);
+            int intNum = 1;
+            Assert.AreEqual(true, rational1 == intNum);
+            Assert.AreEqual(false, rational2 == intNum);
+        }
+
+        [Test]
+        public void Equality_Of_Rational_And_Rational()
+        {
+            CRational rational1 = new CRational(2, 2);
+            CRational rational2 = new CRational(2, 3);
+            CRational rational3 = new CRational(8, 8);
+            Assert.AreEqual(true, rational1 == rational3);
+            Assert.AreEqual(false, rational2 == rational3);
+        }
+
+        [Test]
+        public void Inequality_Of_Rational_And_Integer()
+        {
+            CRational rational1 = new CRational(2, 2);
+            CRational rational2 = new CRational(2, 3);
+            int intNum = 1;
+            Assert.AreEqual(false, rational1 != intNum);
+            Assert.AreEqual(true, rational2 != intNum);
+        }
+
+        [Test]
+        public void Inequality_Of_Rational_And_Rational()
+        {
+            CRational rational1 = new CRational(2, 2);
+            CRational rational2 = new CRational(2, 3);
+            CRational rational3 = new CRational(8, 8);
+            Assert.AreEqual(false, rational1 != rational3);
+            Assert.AreEqual(true, rational2 != rational3);
+        }
+    }
+
+    public class ComparisonOperatorsTests
+    {
+        [Test]
+        public void Operators_For_Comparing_Rational_With_Integer()
+        {
+            CRational rational = new CRational(2, 2);
+            int intNum1 = 1;
+            int intNum2 = 2;
+            int intNum3 = 0;
+            Assert.AreEqual(true, rational > intNum3);
+            Assert.AreEqual(true, rational < intNum2);
+            Assert.AreEqual(false, rational > intNum1);
+            Assert.AreEqual(false, rational > intNum2);
+            Assert.AreEqual(false, rational < intNum3);
+            Assert.AreEqual(false, rational < intNum1);
+        }
+
+        [Test]
+        public void Operators_For_Comparing_Rational_With_Rational()
+        {
+            CRational rational1 = new CRational(2, 2);
+            CRational rational2 = new CRational(4, 4);
+            CRational rational3 = new CRational(4, 2);
+            CRational rational4 = new CRational();
+            Assert.AreEqual(true, rational1 > rational4);
+            Assert.AreEqual(true, rational1 < rational3);
+            Assert.AreEqual(false, rational1 > rational2);
+            Assert.AreEqual(false, rational1 > rational3);
+            Assert.AreEqual(false, rational1 < rational4);
+            Assert.AreEqual(false, rational1 < rational2);
         }
     }
 }
