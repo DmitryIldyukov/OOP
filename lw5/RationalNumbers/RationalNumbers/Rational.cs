@@ -287,5 +287,25 @@ namespace RationalNumbers
 
         private int Numerator { get; set; }
         private int Denominator { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            return this == (CRational)obj;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(this);
+        }
     }
 }
