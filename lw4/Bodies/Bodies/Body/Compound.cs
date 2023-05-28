@@ -19,15 +19,15 @@ namespace Bodies.Body
             CompoundBodies.Add(body);
             this.Density = this.GetCompoundDensity();
         }
-        private bool DeleteBody(int index)
+        private bool DeleteBody(int id)
         {
-            if (index < 1 || index > CompoundBodies.Count)
-            {
-                return false;
-            }
+            //if (index < 0 || index >= CompoundBodies.Count)
+            //{
+            //    return false;
+            //}
 
-            CompoundBodies.RemoveAt(index--);
-            this.Density = this.GetCompoundDensity();
+            //CompoundBodies.RemoveAt(index);
+            //this.Density = this.GetCompoundDensity();
 
             return true;
         }
@@ -58,7 +58,7 @@ namespace Bodies.Body
         }
         public override string ToString()
         {
-            return $"{this.Type}:\n\tdensity: {this.GetCompoundDensity()}\n\tvolume: {this.GetVolume()}\n\tmass: {this.GetMass()}";
+            return $"{this.Type}:\n\tid: {this.Id}\n\tdensity: {this.GetCompoundDensity()}\n\tvolume: {this.GetVolume()}\n\tmass: {this.GetMass()}";
         }
         public string ShowAllBodiesInCompound()
         {

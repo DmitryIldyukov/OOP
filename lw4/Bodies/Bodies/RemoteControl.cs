@@ -20,6 +20,8 @@ namespace Bodies
         const string ENTER_DEPTH_LINE = "Введите глубину тела: ";
         const string BODY_WITH_SMALLEST_MASS_IN_WATER_MESSAGE = "Тело с наименьшей массой в воде: ";
         const string SHOW_BODY_WITH_LARGEST_MASS_MESSAGE = "Тело с наибольшей массой: ";
+        const string COMPOUND_BODY_ERROR_COUNT = "Составное тело должно состоять хотя бы из одного тела";
+        const string COMPOUND_BODY_GET_COUNT_MESSAGE = "Введите размер составного тела (количество тел, из которых будет состоять составное тело)";
         const string NOBODY_MESSAGE = "Вы не создали ни одного тела";
         const string ERROR_ENTERED = "Ошибка, неверный ввод!";
         const string FIGURE_CREATED_MESSAGE = "Фигура создана";
@@ -100,6 +102,10 @@ namespace Bodies
                         ShowBodyWithSmallestMassInWater();
                         break;
                     }
+                case EXIT:
+                    {
+                        break;
+                    }
                 default:
                     {
                         Output.WriteLine(ERROR);
@@ -116,6 +122,7 @@ namespace Bodies
         private bool CreateBody(List<CBody> bodiesList)
         {
             Output.WriteLine(CHOISE_LINE);
+            Output.Write(ENTER_LINE);
             if (!int.TryParse(Input.ReadLine(), out int choise))
             {
                 Output.WriteLine(ERROR);
@@ -328,10 +335,17 @@ namespace Bodies
         /// <returns></returns>
         private bool CreateCompoundBody(List<CBody> bodiesList)
         {
-            Output.WriteLine("Введите размер составного тела (количество тел, из которых будет состоять составное тело)");
+            Output.WriteLine(COMPOUND_BODY_GET_COUNT_MESSAGE);
+            Output.Write(ENTER_LINE);
             if (!int.TryParse(Input.ReadLine(), out int count))
             {
-                Output.WriteLine("Ошибка, введите число!");
+                Output.WriteLine(ERROR_ENTERED);
+                return false;
+            }
+
+            if (count <= 0)
+            {
+                Output.WriteLine(COMPOUND_BODY_ERROR_COUNT);
                 return false;
             }
 
@@ -375,15 +389,7 @@ namespace Bodies
                 return;
             }
 
-            CBody largestMassBody = BodiesList[0];
-
-            for (int i = 1; i < BodiesList.Count; i++)
-            {
-                if (BodiesList[i].GetMass() > largestMassBody.GetMass())
-                {
-                    largestMassBody = BodiesList[i];
-                }
-            }
+            CBody largestMassBody = BodiesList.Aggregate((body1, body2) => body1.GetMass() > body2.GetMass() ? body1 : body2);
 
             Output.WriteLine(SHOW_BODY_WITH_LARGEST_MASS_MESSAGE);
             Output.WriteLine(largestMassBody.ToString());
@@ -400,15 +406,7 @@ namespace Bodies
                 return;
             }
 
-            CBody smallestMassInWaterBody = BodiesList[0];
-
-            for (int i = 1; i < BodiesList.Count; i++)
-            {
-                if (GetMassInWater(BodiesList[i]) > GetMassInWater(smallestMassInWaterBody))
-                {
-                    smallestMassInWaterBody = BodiesList[i];
-                }
-            }
+            CBody smallestMassInWaterBody = BodiesList.Aggregate((body1, body2) => GetMassInWater(body1) < GetMassInWater(body2) ? body1 : body2);
 
             Output.WriteLine(BODY_WITH_SMALLEST_MASS_IN_WATER_MESSAGE);
             Output.WriteLine(smallestMassInWaterBody.ToString());
@@ -429,8 +427,8 @@ namespace Bodies
 
         //TODO: Действия с составным телом, выбор составного тела
 
-        private System.IO.TextReader Input { get; }
-        private System.IO.TextWriter Output { get; }
-        private List<CBody> BodiesList { get; }
+        public System.IO.TextReader Input { get; }
+        public System.IO.TextWriter Output { get; }
+        public List<CBody> BodiesList { get; }
     }
 }
