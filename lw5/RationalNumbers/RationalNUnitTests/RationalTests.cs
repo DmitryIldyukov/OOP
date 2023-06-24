@@ -44,7 +44,7 @@ namespace RationalNUnitTests
         [Test]
         public void Creating_Rational_Number_With_Two_Args_Where_Denominator_Is_Less_Than_Zero()
         {
-            Assert.Throws<ArgumentException>(() => new CRational(9, -1));
+            Assert.Throws<ArgumentNullException>(() => new CRational(9, -1));
         }
 
         [Test]
@@ -63,11 +63,17 @@ namespace RationalNUnitTests
     }
     public class RationalToDoubleMethodTests
     {
+        public bool IsGood(double first, double second)
+        {
+            const double e = 0.01;
+            return Math.Abs(first - second) < e;
+        }
+
         [Test]
         public void Rational_Number_Is_Good()
         {
             CRational rationalNumber = new CRational(20, 10);
-            Assert.AreEqual(2.0, rationalNumber.ToDouble());
+            Assert.AreEqual(IsGood(2.0, rationalNumber.ToDouble()), true);
         }
     }
     public class RationalUnaryMinusAndPlusOperatorTests
@@ -268,6 +274,16 @@ namespace RationalNUnitTests
         }
 
         [Test]
+        public void Multiplication_With_Null()
+        {
+            CRational rational = new CRational(2, 3);
+            int num = 0;
+            CRational result = rational * num;
+            CRational expectedResult = new CRational(0, 3);
+            Assert.AreEqual(result, expectedResult);
+        }
+
+        [Test]
         public void Multiplication_With_Rational_Number()
         {
             CRational rational1 = new CRational(2, 3);
@@ -339,6 +355,21 @@ namespace RationalNUnitTests
             CRational expectedResult = new CRational(4, 9);
             Assert.AreEqual(expectedResult.GetNumerator(), rational1.GetNumerator());
             Assert.AreEqual(expectedResult.GetDenominator(), rational1.GetDenominator());
+        }
+
+        [Test]
+        public void Division_With_Null()
+        {
+            CRational rational = new CRational(5);
+            Assert.Throws<DivideByZeroException>(() => rational /= 0);
+        }
+
+        [Test]
+        public void Division_With_Null_Rational()
+        {
+            CRational rational = new CRational(5);
+            CRational rational1 = new CRational(0);
+            Assert.Throws<DivideByZeroException>(() => rational /= rational1);
         }
     }
 

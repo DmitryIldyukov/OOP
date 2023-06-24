@@ -1,54 +1,92 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Student
 {
-    class CStudent
+    public class CStudent
     {
-        public CStudent(string name)
+        public CStudent(string name, string surname, string patronymic, int age)
         {
             try
             {
-                if (string.IsNullOrEmpty(name))
-                {
+                IsCorrectName(name, surname, patronymic);
+                IsCorrectAge(age);
 
-                }
+                this.name = name;
+                this.surname = surname;
+                this.patronymic = patronymic;
+                this.age = age;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine($"Error message: {e.Message}\nError type: {e.GetType()}");
+                Console.WriteLine($"Сообщение ошибки: {ex.Message}\nТип ошибки: {ex.GetType()}");
+                throw;
             }
         }
 
+        private void IsCorrectName(string name, string surname, string patronymic)
+        {
+            if (string.IsNullOrEmpty(name))
+                throw new ArgumentNullException("Имя не может быть путым значением.");
+            if (name.Contains(' '))
+                throw new ArgumentException("Имя не должно содержать пробелы.");
+            if (string.IsNullOrEmpty(surname))
+                throw new ArgumentNullException("Фамилия не может быть пустым значением.");
+            if (surname.Contains(' '))
+                throw new ArgumentException("Фамилия не должно содержать пробелы.");
+            if (patronymic.Contains(' '))
+                throw new ArgumentException("Отчество не должно содержать пробелы.");
+        }
 
+        private void IsCorrectAge(int age)
+        {
+            if (age < 14 || age > 60)
+                throw new ArgumentOutOfRangeException("Недопустимый возраст.");
+        }
         
-        public string Name
+        public string GetName()
         {
-            get { return name; }
-            set { name = value; }
+            return name;
         }
-        public string Surname
+
+        public string GetSurname()
         {
-            get { return surname; }
-            set { surname = value; }
+            return surname;
         }
-        public string Patronymic
+
+        public string GetPatronymic()
         {
-            get { return patronymic; }
-            set { patronymic = value; }
+            if (string.IsNullOrEmpty(patronymic))
+                return "У этого студента нет отчества.";
+            return patronymic;
         }
-        public int Age
+        public int GetAge()
         {
-            get { return age; }
-            set { age = value; }
+            return age;
+        }
+
+        public void Rename(string name, string surname, string patronymic = "")
+        {
+            IsCorrectName(name, surname, patronymic);
+            
+            this.name = name;
+            this.surname = surname;
+            this.patronymic = patronymic;
+        }
+        public void SetAge(int age)
+        {
+            IsCorrectAge(age);
+
+            this.age = age;
+        }
+
+        public override string ToString()
+        {
+            return $"Имя: {name}\nФамилия: {surname}\nОтчество: {patronymic}\nВозраст: {age}";
         }
 
         private string name;
         private string surname;
-        private string patronymic;
+        private string patronymic = "";
         private int age;
     }
 }

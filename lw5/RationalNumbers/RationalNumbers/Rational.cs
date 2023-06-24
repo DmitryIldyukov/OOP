@@ -116,8 +116,12 @@ namespace RationalNumbers
         /// <returns></returns>
         public static CRational operator /(CRational rational1, CRational rational2)
         {
+            if (rational2 == 0)
+                throw new DivideByZeroException("Нельзя делить на ноль");
             int newNumerator = rational1.Numerator * rational2.Denominator;
             int commonDenuminator = rational1.Denominator * rational2.Numerator;
+            if (commonDenuminator == 0)
+                throw new DivideByZeroException("Нельзя делить на ноль");
             return new CRational(newNumerator, commonDenuminator);
         }
 

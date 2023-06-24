@@ -6,14 +6,25 @@ namespace Student
     {
         static void Main(string[] args)
         {
-            CStudent student1 = new CStudent("Name_1");
-            student1.Age = 9;
+            CStudent student = null;
+            try
             {
-                CStudent student2 = new CStudent("Name_2");
-                CStudent student3 = new CStudent("Name_3");
+                student = new CStudent("Dmitry", "Ildyukov", "", 20);
+                Console.WriteLine(student);
+                Console.WriteLine();
+                student.Rename("Dima", "Ildyukov", "Urevich");
+                Console.WriteLine(student);
+                Console.WriteLine();
+                student.Rename("", "", "");
+                Console.WriteLine(student);
             }
-            CStudent student4 = new CStudent("Name_4");
-            CStudent Student5 = new CStudent("Name_5");
+            catch (Exception e)
+            {
+                Console.WriteLine($"Сообщение ошибки: {e.Message}\nТип ошибки: {e.GetType()}");
+                Console.WriteLine();
+            }
+
+            Console.WriteLine(student);
         }
     }
 }
